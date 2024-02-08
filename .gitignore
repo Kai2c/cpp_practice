@@ -1,0 +1,7 @@
+# vs code editor files
+*.vscode
+
+# build files
+*.exe 
+*.o
+*.obj
