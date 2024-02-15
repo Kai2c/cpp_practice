@@ -6,14 +6,14 @@
 class US_CoinConverter
 {
     private: 
-        typedef struct
+        struct US_Coins
         {
             int dollars;
             int quarters;
             int dimes; 
             int nickels; 
             int pennies;
-        }US_Coins;  
+        };  
 
         US_Coins coins;
 
