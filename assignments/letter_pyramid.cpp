@@ -128,5 +128,4 @@ int main(void)
         chars.insert(0,line);
         std::cout << chars << std::endl;
     }
-
 }
