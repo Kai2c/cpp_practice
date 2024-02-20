@@ -92,11 +92,196 @@ Good luck!
 
 */
 
+/****************************************************************************** 
+ * Includes
+ *****************************************************************************/
 #include <iostream> 
+#include <vector> 
 
+/****************************************************************************** 
+ * Prototypes
+ *****************************************************************************/
+void print_menu(void);
+bool handle_input(std::vector<int> &vec, char c);
+void add_num(std::vector<int> &vec); 
+void clear_vec(std::vector<int> &vec);
+void find_num(const std::vector<int> &vec);
+void display_largest(const std::vector<int> &vec); 
+void display_smallest(const std::vector<int> &vec);
+void display_mean(const std::vector<int> &vec);
+void print_nums(const std::vector<int> &vec);  
+
+/****************************************************************************** 
+ * Main
+ *****************************************************************************/
 int main(void)
 {
-    std::cout << "See solution 'section11_challenge.cpp' -- implemented using classes and methods.\n";
+    std::vector<int> vec; 
+    char command {};
+    bool quit {false};
+
+    do
+    {
+        print_menu(); 
+        std::cin >> command;
+        quit = handle_input(vec, command);
+    }while(quit == false);
 
     return 0;
+}
+
+/****************************************************************************** 
+ * Function Definitions
+ *****************************************************************************/
+void print_menu(void)
+{
+    std::cout << std::endl;
+    std::cout << "A - Add a number" << std::endl;
+    std::cout << "C - Clear the list" << std::endl;
+    std::cout << "F - Find a number" << std::endl;
+    std::cout << "L - Display the largest number" << std::endl;
+    std::cout << "M - Display mean of the numbers" << std::endl;
+    std::cout << "P - Print numbers" << std::endl;
+    std::cout << "S - Display the smallest number" << std::endl;
+    std::cout << "Q - Quit" << std::endl << std::endl;
+
+    return;
+}
+
+bool handle_input(std::vector<int> &vec, char c)
+{
+    bool ret = false; 
+    switch(c)
+    {
+        case 'a':
+        case 'A':
+            add_num(vec);
+            break;
+        case 'c': 
+        case 'C': 
+            clear_vec(vec);
+            break; 
+        case 'f': 
+        case 'F': 
+            find_num(vec);
+            break;
+        case 'l': 
+        case 'L': 
+            display_largest(vec);
+            break; 
+        case 'm': 
+        case 'M': 
+            display_mean(vec);
+            break; 
+        case 'p': 
+        case 'P': 
+            print_nums(vec);
+            break; 
+        case 's': 
+        case 'S': 
+            display_smallest(vec);
+            break; 
+        case 'q': 
+        case 'Q':
+            std::cout << "Quitting...\n";
+            ret = true;
+            break; 
+        default: 
+            break; 
+    }
+
+    return ret;
+}
+
+void add_num(std::vector<int> &vec)
+{
+    int num {};
+
+    std::cout << "Enter an integer to add to the list\n";
+    std::cin >> num; 
+    vec.push_back(num); 
+}
+
+void clear_vec(std::vector<int> &vec)
+{
+    std::cout << "Clearing number list...\n";
+    vec.clear();
+}
+
+void find_num(const std::vector<int> &vec)
+{
+    int num {}; 
+    bool found = false; 
+
+    std::cout << "Enter an integer to find in the list\n";
+    std::cin >> num; 
+
+    for(int i = 0; i < vec.size(); i++)
+    {
+        if(vec.at(i) == num) 
+        {
+            std::cout << "Found " << num << " at postiion " << i << " in list\n";
+            found = true;
+            break;
+        }
+    }
+
+    if(!found)
+    {
+        std::cout << "Did not find " << num << " in list\n";
+    }
+}
+
+void display_largest(const std::vector<int> &vec)
+{
+    int largest = INT_MIN;
+
+    for(auto el : vec)
+    {
+        if(el > largest)
+        {
+            largest = el;
+        }
+    }
+
+    std::cout << "The largest integer in the list is " << largest << '\n';
+}
+
+void display_smallest(const std::vector<int> &vec)
+{
+    int smallest = INT_MAX; 
+
+    for(auto el : vec)
+    {
+        if(el < smallest)
+        {
+            smallest = el;
+        }
+    }
+
+    std::cout << "The smallest integer in the list is " << smallest << '\n';
+}
+
+void display_mean(const std::vector<int> &vec)
+{
+    double mean {}; 
+
+    for(auto el : vec)
+    {
+        mean += el;
+    }
+
+    mean /= vec.size();
+
+    std::cout << "The mean value of the list is " << mean << '\n';
+}
+
+void print_nums(const std::vector<int> &vec)
+{
+    std::cout << "[ ";
+    for(auto el : vec)
+    {
+        std::cout << el << ' ';
+    }
+    std::cout << "]\n";
 }
