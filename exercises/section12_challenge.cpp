@@ -38,8 +38,8 @@
   
 #include <iostream>
 
-int *apply_all(int *arr1, size_t arr1_size, int *arr2, size_t arr2_size);
-void print(int *arr, size_t size);
+int *apply_all(int const *arr1, const size_t arr1_size, int const *arr2, const size_t arr2_size);
+void print(int const * const arr, const size_t size);
 
 int main() {
     const size_t array1_size {5};
@@ -65,7 +65,7 @@ int main() {
     return 0;
 }
 
-int *apply_all(int *arr1, size_t arr1_size, int *arr2, size_t arr2_size)
+int *apply_all(int const *arr1, const size_t arr1_size, int const *arr2, const size_t arr2_size)
 {
     int *new_arr = new int[arr1_size * arr2_size];
     size_t offset = 0;
@@ -86,7 +86,7 @@ int *apply_all(int *arr1, size_t arr1_size, int *arr2, size_t arr2_size)
     return new_arr;
 }
 
-void print(int *arr, size_t size)
+void print(int const * const arr, const size_t size)
 {
     std::cout << "[ ";
     for(size_t i = 0; i < size; i++)
